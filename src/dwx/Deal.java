@@ -4,6 +4,7 @@ package dwx;
  * Created by dwx on 2019/3/20.
  */
 
+import java.math.BigDecimal;
 import java.util.Stack;
 
 public class Deal {
@@ -34,10 +35,21 @@ public class Deal {
             } else
                 mText += c;
         } else if (c == '^') {
-            int i = 0;
-            i = Integer.valueOf(mText).intValue();
+            double i = 0;
+
+            i = Double.valueOf(mText).doubleValue();
+            //这里由于double计算小数精度不准确，转为商业计算BigDecimal，确保小数位准确。
+            BigDecimal i_=new BigDecimal(Double.toString(i));
+
+//            System.out.println(i_.multiply(i_).doubleValue());
+//
+//            System.out.println("i = "+i);
+//            System.out.println("Math.pow(i,2) = "+Math.pow(i,2));
+
+
+
             mText = "";
-            mText += i * i;
+            mText += i_.multiply(i_).doubleValue();
         } else if (c == '+' || c == '-' || c == '×' || c == '÷') {
 
             if (mText != "") {
@@ -192,7 +204,7 @@ public class Deal {
                     c = a * b;
                 }
                 if (mSuffix[i].equals("÷")) {
-                    if (c == 0.0) {
+                    if (b == 0.0) {
                         mText = "VALUE ERROR";
                         break;
                     } else
