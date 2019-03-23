@@ -46,8 +46,7 @@ public class Deal {
 //            System.out.println("i = "+i);
 //            System.out.println("Math.pow(i,2) = "+Math.pow(i,2));
 
-
-
+            
             mText = "";
             mText += i_.multiply(i_).doubleValue();
         } else if (c == '+' || c == '-' || c == '×' || c == '÷') {
