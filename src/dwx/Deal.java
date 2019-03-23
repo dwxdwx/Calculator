@@ -12,7 +12,6 @@ public class Deal {
     public int mDetailPos;
     public String mAns = new String();
     private int mLeftBracketNum;
-
     private String[] mSuffix = new String[105];
     private int mSuffixPos;
     private Stack mTemp = new Stack();
