@@ -87,7 +87,6 @@ public class Show extends JFrame {
             for(int i=1;i<=4;i++){
                 g.drawLine(mDivY[i], mDivision, mDivY[i], this.getHeight());
             }
-
             //绘字
             for(int i=0;i<5;i++){
                 for(int j=0;j<4;j++){
