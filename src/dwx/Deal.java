@@ -176,15 +176,6 @@ public class Deal {
             mTemp.pop();
         }
         toSuffix();
-        //输出测试
-
-        for (int i = 0; i < mDetailPos; i++)
-            System.out.print(mTextDetail[i] + " ");
-        System.out.print("\n");
-        for (int i = 0; i < mSuffixPos; i++) {
-            System.out.print(mSuffix[i] + " ");
-        }
-        System.out.print("\n");
 
         for (int i = 0; i < mSuffixPos; i++) {
             if (mSuffix[i].equals("+") || mSuffix[i].equals("-")
@@ -192,9 +183,6 @@ public class Deal {
                 double b = Double.valueOf((String) mTemp.pop()).doubleValue();
                 double a = Double.valueOf((String) mTemp.pop()).doubleValue();
                 double c = 0;
-                System.out.println("a = " + a);
-                System.out.println("b = " + b);
-                System.out.println("c = " + c);
                 if (mSuffix[i].equals("+")) {
                     c = a + b;
                 }
@@ -217,9 +205,6 @@ public class Deal {
                 mTemp.push(str);
             } else {
                 mTemp.push(mSuffix[i]);
-                System.out.println("mSuffix[i] =" + mSuffix[i]);
-
-
             }
         }
         mAns = (String) mTemp.pop();

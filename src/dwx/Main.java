@@ -27,7 +27,6 @@ public class Main {
             }
 
             public void mouseReleased(MouseEvent e) {
-                // TODO Auto-generated method stub
                 super.mouseReleased(e);
                 show.mSelectX=-1;
                 show.mSelectY=-1;

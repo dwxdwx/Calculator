@@ -72,7 +72,7 @@ public class Show extends JFrame {
             {
                 mDeal.Change(mSign[mSelectX][mSelectY]);
                 for(int i=mDivX[mSelectX];i<=mDivX[mSelectX]+mDivHeight;i++){
-                    Color myColor = new Color(255,200,0);
+                    Color myColor = new Color(150, 200, 0);
                     g.setColor(myColor);
                     g.drawLine( mDivY[mSelectY], i, mDivY[mSelectY]+mDivWidth,i);
                 }
