@@ -30,7 +30,9 @@ public class Deal extends Component {
 
 
         mAns = "0";
-        if (c <= '9' && c >= '0') {
+        //判断输入的是什么
+        if (c <= '9' && c >= '0') {//数字
+            //先清除之前输入框上的报错
             if (mText == "FORMAT ERROR") {
                 mText = "";
                 mDetailPos = 0;
@@ -40,8 +42,11 @@ public class Deal extends Component {
                     mText += c;
             } else
                 mText += c;
-        } else if (c == '+' || c == '-' || c == '×' || c == '÷' || c == '^') {
-
+        } else if (c == '+' || c == '-' || c == '×' || c == '÷' || c == '^') {//运算符
+            if (mText == "FORMAT ERROR") {//先清空报错
+                mText = "";
+                mDetailPos = 0;
+            }
             if (mText != "") {
                 if (mText.substring(mText.length() - 1, mText.length()).equals("."))//确保末尾不能有小数点
                 {
@@ -81,6 +86,7 @@ public class Deal extends Component {
         } else if (c == '=') {
             if (mText != "")
                 mTextDetail[mDetailPos++] = mText;
+                //输入框是空直接点等号会报错
             else {
                 mText = "FORMAT ERROR";
             }
@@ -131,6 +137,7 @@ public class Deal extends Component {
     public void toSuffix() {
         for (int i = 0; i < mDetailPos - 1; i++)//-1是因为式子包含了最后的 = + -
         {
+            //加减是一个等级
             if (mTextDetail[i].equals("+") == true ||
                     mTextDetail[i].equals("-") == true) {
                 while (mTemp.empty() == false &&
@@ -143,14 +150,18 @@ public class Deal extends Component {
                     mTemp.pop();
                 }
                 mTemp.push(mTextDetail[i]);
-            } else if (mTextDetail[i].equals("^") == true) {
+            }
+            //这里把乘方单独拿出来作为一个等级
+            else if (mTextDetail[i].equals("^") == true) {
                 while (mTemp.empty() == false &&
                         (mTemp.peek().equals("^") == true)) {
                     mSuffix[mSuffixPos++] = (String) mTemp.peek();
                     mTemp.pop();
                 }
                 mTemp.push(mTextDetail[i]);
-            } else if (mTextDetail[i].equals("×") == true ||
+            }
+            //乘除是一个等级
+            else if (mTextDetail[i].equals("×") == true ||
                     mTextDetail[i].equals("÷") == true) {
                 while (mTemp.empty() == false &&
                         (mTemp.peek().equals("×") == true ||
@@ -177,6 +188,7 @@ public class Deal extends Component {
         }
     }
 
+    //实现计算具体功能的函数
     public void Calculate() {
         mSuffixPos = 0;
         for (int i = 0; i < 100; i++) {
@@ -190,14 +202,17 @@ public class Deal extends Component {
         for (int i = 0; i < mSuffixPos; i++) {
             if (mSuffix[i].equals("+") || mSuffix[i].equals("-")
                     || mSuffix[i].equals("×") || mSuffix[i].equals("÷") || mSuffix[i].equals("^")) {
-                double b = Double.valueOf((String) mTemp.pop()).doubleValue();
+                //接收到两个数
                 double a = Double.valueOf((String) mTemp.pop()).doubleValue();
+                double b = Double.valueOf((String) mTemp.pop()).doubleValue();
+
+
                 double c = 0;
                 if (mSuffix[i].equals("+")) {
                     c = a + b;
                 }
                 if (mSuffix[i].equals("-")) {
-                    c = a - b;
+                    c = b - a;
                 }
                 if (mSuffix[i].equals("×")) {
                     c = a * b;
@@ -209,7 +224,7 @@ public class Deal extends Component {
                         break;
 
                     } else
-                        c = a / b;
+                        c = b / a;
 
                 }
                 if (mSuffix[i].equals("^")) {
