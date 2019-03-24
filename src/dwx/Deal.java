@@ -4,10 +4,12 @@ package dwx;
  * Created by dwx on 2019/3/20.
  */
 
+import javax.swing.*;
+import java.awt.*;
 import java.math.BigDecimal;
 import java.util.Stack;
 
-public class Deal {
+public class Deal extends Component {
     public String mText = new String();
     public String[] mTextDetail = new String[100];//用数组方便放入栈中
     public int mDetailPos;
@@ -29,6 +31,10 @@ public class Deal {
 
         mAns = "0";
         if (c <= '9' && c >= '0') {
+            if (mText == "FORMAT ERROR") {
+                mText = "";
+                mDetailPos = 0;
+            }
             if (mDetailPos > 0) {
                 if (mTextDetail[mDetailPos - 1].equals(")") == false)
                     mText += c;
@@ -198,8 +204,10 @@ public class Deal {
                 }
                 if (mSuffix[i].equals("÷")) {
                     if (b == 0.0) {
+                        mTemp.push("VALUE ERROR");
                         mText = "VALUE ERROR";
                         break;
+
                     } else
                         c = a / b;
 

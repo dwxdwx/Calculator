@@ -1,25 +1,21 @@
 package dwx;
 
-/**
- * Created by dwx on 2019/3/20.
- */
-
 import java.awt.*;
 import javax.swing.*;
 
 public class Show extends JFrame {
-    public int mDivision;	//按钮与显示的分界线
-    public int mDivWidth;	//每个小格的宽
+    public int mDivision;  //按钮与显示的分界线
+    public int mDivWidth;  //每个小格的宽
     public int mDivHeight; //每个小格的高
-    public int[] mDivX = new int[10];	//存每个小格左上角的x坐标
-    public int[] mDivY = new int[10];	//存每个小格左上角的y坐标
+    public int[] mDivX = new int[10];  //存每个小格左上角的x坐标
+    public int[] mDivY = new int[10];  //存每个小格左上角的y坐标
     public int mSelectX;
     public int mSelectY;
     public char [][] mSign = {{'C','^','(',')'},{'1','2','3','+'},{'4','5','6','-'},{'7','8','9','×'},{'.','0','=','÷'}};
     public Deal mDeal = new Deal();
     public Show(){
         setTitle("计算器");
-        setSize(90*3,160*3);
+        setSize(120 * 3, 160 * 3);
         this.getContentPane().add(new MyPanel());
         setVisible(true);
         setResizable(false);
@@ -34,6 +30,9 @@ public class Show extends JFrame {
         protected void paintComponent(Graphics g) {
 
             super.paintComponent(g);
+            Graphics2D g2 = (Graphics2D) g;  //g是Graphics对象
+            g2.setStroke(new BasicStroke(3.0f));
+
             /**
              * 存储位置
              */
@@ -55,14 +54,14 @@ public class Show extends JFrame {
              */
             //背景
             for(int i=0;i<mDivision;i++){
-                Color myColor = new Color(255,255,255);
+                Color myColor = new Color(155, 155, 155);
                 g.setColor(myColor);
                 g.drawLine(0, i, this.getWidth(), i);
             }
 
             for(int i=mDivision;i<this.getHeight();i++){
                 //Color myColor = new Color(250-i/3,200-i/3,i/3);
-                Color myColor = new Color(50,50,50);
+                Color myColor = new Color(90, 90, 90);
                 g.setColor(myColor);
                 g.drawLine(0, i, this.getWidth(), i);
             }
@@ -82,16 +81,16 @@ public class Show extends JFrame {
 
             //网格
             for(int i=0;i<5;i++){
-                g.drawLine(0, mDivX[i], this.getWidth(), mDivX[i]);
+                g2.drawLine(0, mDivX[i], this.getWidth(), mDivX[i]);
             }
             for(int i=1;i<=4;i++){
-                g.drawLine(mDivY[i], mDivision, mDivY[i], this.getHeight());
+                g2.drawLine(mDivY[i], mDivision, mDivY[i], this.getHeight());
             }
             //绘字
             for(int i=0;i<5;i++){
                 for(int j=0;j<4;j++){
-                    g.setFont(new Font("Arial", Font.PLAIN, 20));
-                    g.drawString(String.valueOf(mSign[i][j]), mDivY[j]+mDivWidth/2-2, mDivX[i]+mDivHeight/2+5); //-2  +5是根据显示进行的微调
+                    g2.setFont(new Font("Arial", Font.PLAIN, 25));
+                    g2.drawString(String.valueOf(mSign[i][j]), mDivY[j] + mDivWidth / 2 - 2, mDivX[i] + mDivHeight / 2 + 5); //-2  +5是根据显示进行的微调
                 }
             }
             //输入框的字
