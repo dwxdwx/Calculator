@@ -34,24 +34,7 @@ public class Deal {
                     mText += c;
             } else
                 mText += c;
-        }
-//        else if (c == '^') {
-//            double i = 0;
-//
-//            i = Double.valueOf(mText).doubleValue();
-//            //这里由于double计算小数精度不准确，转为商业计算BigDecimal，确保小数位准确。
-//            BigDecimal i_=new BigDecimal(Double.toString(i));
-//
-////            System.out.println(i_.multiply(i_).doubleValue());
-////
-////            System.out.println("i = "+i);
-////            System.out.println("Math.pow(i,2) = "+Math.pow(i,2));
-//
-//
-//            mText = "";
-//            mText += i_.multiply(i_).doubleValue();
-//        }
-        else if (c == '+' || c == '-' || c == '×' || c == '÷' || c == '^') {
+        } else if (c == '+' || c == '-' || c == '×' || c == '÷' || c == '^') {
 
             if (mText != "") {
                 if (mText.substring(mText.length() - 1, mText.length()).equals("."))//确保末尾不能有小数点
@@ -154,28 +137,23 @@ public class Deal {
                     mTemp.pop();
                 }
                 mTemp.push(mTextDetail[i]);
-            }
-            else if (mTextDetail[i].equals("^") == true) {
+            } else if (mTextDetail[i].equals("^") == true) {
                 while (mTemp.empty() == false &&
                         (mTemp.peek().equals("^") == true)) {
                     mSuffix[mSuffixPos++] = (String) mTemp.peek();
                     mTemp.pop();
                 }
                 mTemp.push(mTextDetail[i]);
-            }
-
-            else if (mTextDetail[i].equals("×") == true ||
-                    mTextDetail[i].equals("÷") == true ||
-                    mTextDetail[i].equals("^") == true) {
+            } else if (mTextDetail[i].equals("×") == true ||
+                    mTextDetail[i].equals("÷") == true) {
                 while (mTemp.empty() == false &&
                         (mTemp.peek().equals("×") == true ||
-                                mTemp.peek().equals("÷") == true ||
-                                mTemp.peek().equals("^") == true)) {
+                                mTemp.peek().equals("÷") == true)) {
                     mSuffix[mSuffixPos++] = (String) mTemp.peek();
                     mTemp.pop();
                 }
                 mTemp.push(mTextDetail[i]);
-            }  else if (mTextDetail[i].equals("(") == true) {
+            } else if (mTextDetail[i].equals("(") == true) {
                 mTemp.push(mTextDetail[i]);
             } else if (mTextDetail[i].equals(")") == true) {
                 while (mTemp.peek().equals("(") == false) {
