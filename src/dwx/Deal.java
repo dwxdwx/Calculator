@@ -203,8 +203,8 @@ public class Deal extends Component {
             if (mSuffix[i].equals("+") || mSuffix[i].equals("-")
                     || mSuffix[i].equals("×") || mSuffix[i].equals("÷") || mSuffix[i].equals("^")) {
                 //接收到两个数
-                double a = Double.valueOf((String) mTemp.pop()).doubleValue();
                 double b = Double.valueOf((String) mTemp.pop()).doubleValue();
+                double a = Double.valueOf((String) mTemp.pop()).doubleValue();
 
 
                 double c = 0;
@@ -212,7 +212,7 @@ public class Deal extends Component {
                     c = a + b;
                 }
                 if (mSuffix[i].equals("-")) {
-                    c = b - a;
+                    c = a - b;
                 }
                 if (mSuffix[i].equals("×")) {
                     c = a * b;
@@ -224,7 +224,7 @@ public class Deal extends Component {
                         break;
 
                     } else
-                        c = b / a;
+                        c = a / b;
 
                 }
                 if (mSuffix[i].equals("^")) {
